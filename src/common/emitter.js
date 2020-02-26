@@ -15,7 +15,7 @@ function broadcast(componentName, eventName, ...params) {
   });
 }
 
-export const Emitter = {
+export default {
   methods: {
     /**
      * 向父组件派发事件

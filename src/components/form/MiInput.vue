@@ -2,6 +2,7 @@
   <div>
     <input type="text" 
       :value="currentValue"
+      :placeholder="placeholder"
       @blur="handleBlur"
       @input="handleInput" 
     />
@@ -9,7 +10,7 @@
 </template>
 
 <script>
-import { Emitter } from '../../common/mixins'
+import Emitter from '../../common/emitter'
 export default {
   name: 'MiInput',
   props: {
@@ -17,34 +18,39 @@ export default {
       type: String,
       default: ''
     },
+    placeholder: {
+      type: String,
+      default: ''
+    }
   },
-  mixins: [Emitter],
   data() {
     return {
       currentValue: this.value
     }
   },
+  mixins: [Emitter],
   watch: {
-    // 外部改变value值时触发事件
     value(val) {
       this.currentValue = val;
     }
   },
   methods: {
     handleInput(e) {
-      // 内部输入时改变 currentValue
-      const value = e.target.value;
-      this.currentValue = value;
-      this.$emit('input', value);
-      this.dispatch('MiFormItem', 'onFormChange', value);
+      const newValue = e.target.value;
+      this.currentValue = newValue;
+      this.$emit('input', newValue);
+      this.dispatch('MiFormItem', 'onFormChange', newValue);
     },
     handleBlur() {
-      this.dispatch('MiFormItem', 'onFormBlur', this.currentValue)
+      this.dispatch('MiFormItem', 'onFormBlur', this.value);
     }
   },
+
 }
 </script>
 
 <style lang="scss" scoped>
-
+input::placeholder {
+  color: #999;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div id="mi-form-item">
-    <label for="" v-if="label" :class="{ 'item-label-required': isRequired  }">{{ label }}</label>
+    <label v-if="label" :class="{ 'item-label-required': isRequired }" class="item-label">{{ label }}</label>
     <div class="item-info">
       <slot></slot>
       <div v-if="validateState === 'error'" class="item-msg">{{ validateMessage }}</div>
@@ -10,7 +10,7 @@
 
 <script>
 import AsyncValidator from 'async-validator'
-import { Emitter } from '../../common/mixins'
+import  Emitter  from '../../common/emitter'
 export default {
   name: 'MiFormItem',
   props: {
@@ -18,81 +18,78 @@ export default {
       type: String,
     },
     prop: {
-      type: String
+      type: String,
+      default: ''
     }
   },
   data() {
     return {
-      isRequired: false,   // 是否为必填
-      validateState: '', //校验状态
-      validateMessage: '',  // 校验信息
+      validateState: '',
+      validateMessage: '',
+      isRequired: false
     }
   },
   computed: {
-    // 获取传入input的值
     fieldValue() {
-      return this.MiForm.model[this.prop];
+      return this.form.model[this.prop] 
     }
   },
-  inject: ['MiForm'],
+  inject: ['form'],
   mixins: [Emitter],
-  // 组件在渲染时，将实例缓存到 Form
   mounted () {
+    // 需校验的缓存 且 监听input框
     if (this.prop) {
-      // 组件挂载时将要校验的缓存
-      this.dispatch('MiForm', 'onFormItemAdd', this);
-      // 设置初始值，以便在重置时恢复默认值
+      this.dispatch('MiForm', 'onMiFormItemAdd', this)
+      this.setRules()
+      // 设置初始值
       this.initialValue = this.fieldValue;
-      this.setRules();
-
     }
   },
-  beforeDestroy () {
-    // 组件销毁前移除
-    this.dispatch('MiForm', 'onFormItemMove', this);
+  destroyed () {
+    // 组件销毁时消除缓存
+    this.dispatch('MiForm', 'onMiFormItemMove', this);
   },
   methods: {
-    
+    // 监听 input框 的事件
     setRules() {
-      // 监听input传过来的事件
       this.$on('onFormChange', this.onFieldChange);
       this.$on('onFormBlur', this.onFieldBlur);
-      // 设置 isRequired 显示 class
+      // 设置this.isRequired
       const rules = this.getRules();
       if (rules.length) {
         for (const rule of rules) {
           if (rule.required) {
-            return this.isRequired = rule.required;
+            this.isRequired = true;
+            break;
           }
         }
       }
     },
-    // 从form获取校验规则
-    getRules() {
-      let FormRules = this.MiForm.rules;
-      FormRules = FormRules ? FormRules[this.prop] : [];
-      return [ ...FormRules ];
-    },
-    // 获取符合change 和 blur 的校验规则
-    getFilterRules(trigger) {
-      const rules = this.getRules();
-      return rules.filter(rule => !rule.trigger || rule.trigger.includes(trigger) );
-    },
-    /**
-    *  校验数据
-    * @param trigger 校验类型
-    * @param callback 回调函数
-    */
-    validate(trigger, callback = () => {}) {
-      let rules = this.getFilterRules(trigger);
 
+    // 获取规则
+    getRules() {
+      let rules = this.form.rules;
+      rules = rules ? rules[this.prop] : [];
+      return [...rules];
+    },
+    // 筛选规则
+    getFilteredRules(trigger) {
+      const rules = this.getRules();
+      return rules.filter(rule => !rule.trigger || rule.trigger.includes(trigger))
+    },
+    
+    /**
+     * 校验数据
+     * @param trigger 校验类型
+     * @param callback 回调函数
+     */
+    validate(trigger, callback = () => {}) {
+      const rules = this.getFilteredRules(trigger);
       if (!rules || rules.length === 0) {
-        return true;
+        return;
       }
 
-      // 设置状态为校验中
       this.validateState = 'validating';
-
       // 以下为 async-validator 库的调用方法
       let descriptor = {};
       descriptor[this.prop] = rules;
@@ -101,26 +98,26 @@ export default {
       let model = {};
 
       model[this.prop] = this.fieldValue;
-
       validator.validate(model, { firstFields: true }, errors => {
         this.validateState = !errors ? 'success' : 'error';
         this.validateMessage = errors ? errors[0].message : '';
-        // 主要给Form来调用
+
         callback(this.validateMessage);
       });
+    },
+    // 重置
+    reset() {
+      this.validateState = '';
+      this.validateMessage = '';
+      this.form.model[this.prop] = this.initialValue;
     },
     onFieldChange() {
       this.validate('change');
     },
     onFieldBlur() {
-      this.validate('blur')
-    },
-    // 重置数据
-    resetField() {
-      this.validateState = '';
-      this.validateMessage = '';
-      this.MiForm.model[this.prop] = this.initialValue;
+      this.validate('blur');
     }
+
   },
 }
 </script>
@@ -129,8 +126,10 @@ export default {
 #mi-form-item {
 
   display: flex;
-  justify-content: space-between;
-
+  // justify-content: space-between;
+  .item-label {
+    width: 100px;
+  }
   .item-info {
     position: relative;
   }
