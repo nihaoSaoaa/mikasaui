@@ -129,20 +129,21 @@ export default {
   // justify-content: space-between;
   .item-label {
     width: 100px;
+    line-height: 100%;
   }
   .item-info {
     position: relative;
   }
   .item-label-required::before {
   content: '*';
-    color: red;
+    color: $red;
   }
   .item-msg {
     position: absolute;
-    color: red;
+    color: $red;
     left: 0;
     bottom: -20px;
-    font-size: 12px;
+    font-size: $little-font;
   }
 }
 </style>

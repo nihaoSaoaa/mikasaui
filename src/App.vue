@@ -1,21 +1,23 @@
 <template>
   <div id="app">
-    <my-form />
-    <!-- <my-swiper /> -->
+    <MyForm />
   </div>
 </template> 
 
 <script>
-import MyForm from './view/myForm/MyForm'
-// import MySwiper from './view/mySwiper/MySwiper'
+import MyForm from 'views/myForm/MyForm'
 export default {
   name: 'App',
   components: {
-    MyForm,
-    // MySwiper
+    MyForm
   },
 }
 </script>
 
 <style lang="scss">
+@import url('./assets/css/base/base.scss');
+#app {
+  width: 100%;
+  height: 100%;
+}
 </style>

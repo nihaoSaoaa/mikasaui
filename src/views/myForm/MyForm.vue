@@ -9,10 +9,10 @@
       </MiFormItem>
       <MiFormItem label="你喜欢的语言" prop="lan" class="item lan-item">
         <MiCheckBoxGroup v-model="formValidate.lan">
-          <MiCheckBox label="java"></MiCheckBox>
-          <MiCheckBox label="c++"></MiCheckBox>
-          <MiCheckBox label="c#"></MiCheckBox>
-          <MiCheckBox label="javascript"></MiCheckBox>
+          <MiCheckBox label="java">java</MiCheckBox>
+          <MiCheckBox label="c++">c++</MiCheckBox>
+          <MiCheckBox label="c#">c#</MiCheckBox>
+          <MiCheckBox label="javascript">javascript</MiCheckBox>
         </MiCheckBoxGroup>
       </MiFormItem>
       <MiFormItem label="性别" prop="sex" class="item">
@@ -24,9 +24,9 @@
       <MiFormItem class="item">
         <MiCheckBox v-model="formValidate.isAgree">同意协议......</MiCheckBox>
       </MiFormItem>
-      <MiFormItem class="item">
-        <button @click.prevent="handleClick" :disabled="!formValidate.isAgree">提交</button>
-        <button @click.prevent="handleReset">重置</button>
+      <MiFormItem class="item btn-item">
+        <MiButton @click="handleClick" :disabled="!formValidate.isAgree" class="submit">提交</MiButton>
+        <MiButton @click="handleReset">重置</MiButton>
       </MiFormItem>
     </MiForm>
   </div>
@@ -37,15 +37,16 @@ import {
   MiForm,
   MiFormItem,
   MiInput
-} from '../../components/form'
+} from 'components/form'
 import {
   MiCheckBox,
   MiCheckBoxGroup
-} from '../../components/checkbox'
+} from 'components/checkbox'
 import {
   MiRadio,
   MiRadioGroup
-} from '../../components/radio'
+} from 'components/radio'
+import MiButton from 'components/button/MiButton'
 export default {
   name: 'MyForm',
   components: {
@@ -57,7 +58,9 @@ export default {
     MiCheckBoxGroup,
 
     MiRadio,
-    MiRadioGroup
+    MiRadioGroup,
+
+    MiButton
   },
   data() {
     return {
@@ -89,23 +92,18 @@ export default {
   methods: {
     handleClick() {
       this.$refs.miForm.validate().then( valid => {
-        valid ? window.alert('提交成功') : window.alert('提交失败');
+        valid ? this.$Alert.success({content: '提交成功'}) : this.$Alert.defeat({content: '提交失败'});
       })
     },
     handleReset() {
       this.$refs.miForm.resetFields();
+      this.$Alert.success({content: '重置成功'})
     }
   },
 }
 </script>
 
 <style lang="scss" scoped>
-@mixin pos-middle {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 .form-div {
   @include pos-middle;
 }
@@ -115,6 +113,14 @@ export default {
   }
   .item {
     margin-bottom: 30px;
+  }
+  .btn-item {
+    margin-left: 50%;
+    transform: translate(-50%);
+    
+    .submit {
+      margin-right: 30px;
+    }
   }
 }
 </style>

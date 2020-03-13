@@ -1,6 +1,7 @@
 <template>
   <div>
     <input type="text" 
+      class="mi-input"
       :value="currentValue"
       :placeholder="placeholder"
       @blur="handleBlur"
@@ -50,7 +51,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-input::placeholder {
-  color: #999;
+.mi-input {
+  width: 20rem;
+  height: 2rem;
+  padding: 5px;
+  &::placeholder {
+    color: $gray;
+  }
 }
 </style>

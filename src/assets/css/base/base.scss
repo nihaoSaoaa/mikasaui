@@ -1,0 +1,78 @@
+@import "../normalize.css";
+@font-face {font-family: "iconfont";
+  src: url('//at.alicdn.com/t/font_1658801_qeh1ct5evdi.eot?t=1583556447370'); /* IE9 */
+  src: url('//at.alicdn.com/t/font_1658801_qeh1ct5evdi.eot?t=1583556447370#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAT4AAsAAAAAClwAAASsAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDZAqHFIVhATYCJAMgCxIABCAFhG0HaxvOCCMRJnyxRvaPBDuG8v9Fce4kLKNDboLn+Xcrz817CUHGDVZVYXfrFlqHijFTkxWTr5ojNc3UPQHwctqPbRRCtf2Xb6efnqYkoYse4efPHzNdWoPls9lc9hfVFJW45vGABlR5FbgAOeCb0InxqdjW0mKiLzh5HwIEqKcLMmbclDnYaLxNAsjZ62MrsWtG9AhdsDVWz0ktcjcmtnGb8TJwV3p/+YZeYoOBqfA+NCM6dg0jXFovV47nsEQ5OPvZAeUhUEAXQIM4vc4rUXmkC4qA9TeaaUAIGwPtGu5Cd617oPVyzwOXmtSLCSEK/TBYqFX/8TARfCAWpAyBuCbqA5eQCwtc4UKBayhIVQuhR0O1FnpMqA7AjvDQIlTgA8DGiUKgGERALsUjtUGpHkbMshB9UywrVmmosLAuVFxQ4A+Fz0qn52Qyc3O5+dnsvPTnJeYLTKvevVxHHaj7R6fTsYCTaoknVs9bM2/O3KsKE0dP7sRydp06Fix6LhfxPZVdEkpsj+8I5iW3OVvPOniy1nj0VN+8I2ca1GOn+63KeybTZDyRHhN6NhtWT+dWplIQTKac+wMBIkaiWSTAiLcEg+K9KuteYMaVzRWdW8rmpipi8YU7pkrX3F9+1YbHXuyzcWvlur2ZuQW5XHTHcx3LtvFAek4gm62OL9yaOB0/kzzlXLUUbYC24eOMC5s3lpbe/2DZ3Dn3O6lkxfy5ZaktFRUtD5XPm98Sb06UzpnnbbxKbdyorvL1GzdGTWXSh+/qhgYN2bsygpSL8g7sP6b/+ENDdowRpHxWvE4iGEanF11PnVpT+9DD06Z+9SUDShypfnNM12qqu455s1pmTJhgYqLov/bnF0cjsWJ+IBaJUnO0h6eeV16P59Pi5wY8v2/69Jrna0i7L79jQ3KvF9qxI+RVJi9jhFypPwiHP9BpXR82PzDT9fVpce5wfY+7n41Ezov0ujm65pJJxb3CayPh9avXrmXQx1uWr9i7099u26xlK/7sPHmknBkhYse/3/aeMaqoTV1R1b3WxBHBs6vvLaq7cPOovjf3u7zfrf1oVM47urFRv+PzYxRJyzljR11cGI2Mk+jdXviyUq/0sqxruMPFIIihOhnjvOWONpQDoC40fnbdr6rxf8zP8abb/5zlBUN+s4MagHdvm7A8bV4XtTFgtuhvqNeBEcz/UlvimWxtikOr55WqQGpE9nIORakhAwj4I/AH9Bbz4Z7qstm5INiUlWDgow4UNm2wmtgFTIL0AQub4RCgM+MfDlLChShE+4FO3CRAKGQPGORzBhSFvILVxA/ApJzvwKJQFASYJyXPDNJOdvHmoIRGFZQ/YCe9Dyy2yfKvFF4talWSMp6kif2w7dajGb9QT7rHnvQOOzMPXqWDs/gYta3AoFKTsyyaDfu8e7TvRpmTbrThoIRGFZQ/YCe9j8fbpvX7VwqvFnWkrcX7JE08PWyzYgb2ouxntb3L/PQOOzPP67xKB2fYqfUjAkP/spqcZXFFaNjn1MnPVWbnq7s3PQEE8C5qiyFKtJhiiU9s8TO/ECuWuYvkmlXN2KeIsvxTHyrydZevD0EgW8ooW4SySJFL5NEI') format('woff2'),
+  url('//at.alicdn.com/t/font_1658801_qeh1ct5evdi.woff?t=1583556447370') format('woff'),
+  url('//at.alicdn.com/t/font_1658801_qeh1ct5evdi.ttf?t=1583556447370') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('//at.alicdn.com/t/font_1658801_qeh1ct5evdi.svg?t=1583556447370#iconfont') format('svg'); /* iOS 4.1- */
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-jianshao:before {
+  content: "\e601";
+}
+.icon-zengjia:before {
+  content: "\e659";
+}
+.icon-check:before {
+  content: "\e602";
+  border: 1px solid #000;
+  color: #fff;
+  box-sizing: border-box;
+  border-radius: 3px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+}
+.icon-radio:before {
+  content: "\e6b3";
+  color: #999;
+}
+.icon-chenggong:before {
+  content: "\e665";
+  color: $success;
+}
+
+.icon-jinggao:before {
+  content: "\e600";
+  color: $warning;
+}
+
+.icon-shibai:before {
+  content: "\e778";
+  color: $danger;
+}
+/* 基础css样式 */
+body {
+  padding: 0;
+  margin: 0;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  user-select: none;
+  /* 禁止用户鼠标在页面上选中文字/图片等 */
+  -webkit-tap-highlight-color: transparent;
+  /* webkit是苹果浏览器引擎，tap点击，highlight背景高亮，color颜色，颜色用数值调节 */
+  /* rem vw/vh */
+  width: 100vw;
+}
+
+a {
+  color: var(--color-text);
+  text-decoration: none;
+}
